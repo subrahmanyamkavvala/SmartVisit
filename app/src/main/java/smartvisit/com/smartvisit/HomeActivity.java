@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -39,6 +40,7 @@ public class HomeActivity extends AppCompatActivity
 {
 
     private static final String TAG = "HomeActivity";
+    TextView profile_name,profile_email;
 
 
     LoginDAO userdao = null;
@@ -68,21 +70,21 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        LoginDAO loginDAO =  AppController.getInstance().getLoginData();
+        Log.d(TAG,"loginDAO:"+loginDAO.branch_email);
 
-         userdao =  AppController.getInstance().getLoginData();
-        Log.d(TAG, "loginDAO:" + userdao.branch_email);
-
-
-
-        mgetCustomer = (Button)findViewById(R.id.getCustomer);
-        mgetCustomer.setOnClickListener(this);
-
-
-        mviewvisitor = (Button)findViewById(R.id.viewvisitor);
-        mviewvisitor.setOnClickListener(this);
+        View headerLayout =
+                navigationView.inflateHeaderView(R.layout.nav_header_home);
 
 
 
+        // proflie View
+        profile_name  = (TextView)headerLayout.findViewById(R.id.profile_name);
+        profile_email  = (TextView)headerLayout.findViewById(R.id.profile_email);
+
+        LoginDAO user = AppController.getInstance().getLoginData();
+        profile_name.setText(user.branch_name);
+        profile_name.setText(user.branch_email);
     }
 
     @Override
@@ -123,18 +125,16 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_visits) {
+            Log.d(TAG,"nav_visits");
+        } else if (id == R.id.nav_addvisitor) {
+            Log.d(TAG,"nav_addvisitor");
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_settings) {
+            Log.d(TAG,"nav_settings");
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_about) {
+            Log.d(TAG,"nav_about");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

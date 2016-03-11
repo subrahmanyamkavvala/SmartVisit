@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="hintColor">#FFFFFF</color>
+    <color name="LIGHT_GRAY">#d3d3d3</color>
+    <color name="list_item_title">#fff</color>
+    <color name="list_background">#303030</color>
+    <color name="list_divider">#c5c4c4</color>
+    <color name="list_background_pressed">#992416</color>
+    <color name="nav_item_icon_tint_color">#333</color>
+    <color name="nav_item_text_color">#333</color>
+    <color name="floating_edittext_hint">#000000</color>
+    <!--
+        <color name="list_item_title">#fff</color>
+        <color name="list_background">#303030</color>
+        <color name="list_background_pressed">#992416</color>
+        <color name="list_divider">#272727</color>-->
+    <color name="counter_text_bg">#626262</color>
+    <color name="counter_text_color">#c5c4c4</color>
+
+    <color name="accent">#FFEB3B</color>
+    <color name="primary">#4CAF50</color>
+    <color name="primary_dark">#388E3C</color>
+    <color name="com_facebook_button_background_color_focused_disabled">#84878c</color>
+
+
+    <color name="TRANSPERENT">#00000000</color>
+    <color name="new_role_creation_bg">#f7f7f7</color>
+    <color name="BLACK">#000000</color>
+
+    <color name="settingsFamilyTitleBarBg">#66068bd4</color>
+
+    <color name="btnbg">#505050</color>
+    <color name="acceptColor">#099688</color>
+
+    <color name="iron">#CCCCCC</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="blue_bg">#00b0e0</color>
+
 </resources>

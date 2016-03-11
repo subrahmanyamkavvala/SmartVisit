@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity
     TextView profile_name,profile_email;
 
 
-    LoginDAO userdao = null;
+   LoginDAO userdao = null;
     private Button mgetCustomer,mviewvisitor,maddvisitor,mgetemployee,msignup,mgetapartment,msignoutvisitr,mforgotpassword;
 
     @Override
@@ -57,15 +57,6 @@ public class HomeActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -74,8 +65,7 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        LoginDAO loginDAO =  AppController.getInstance().getLoginData();
-        Log.d(TAG,"loginDAO:"+loginDAO.branch_email);
+
 
         View headerLayout =
                 navigationView.inflateHeaderView(R.layout.nav_header_home);
@@ -86,9 +76,10 @@ public class HomeActivity extends AppCompatActivity
         profile_name  = (TextView)headerLayout.findViewById(R.id.profile_name);
         profile_email  = (TextView)headerLayout.findViewById(R.id.profile_email);
 
-        LoginDAO user = AppController.getInstance().getLoginData();
-        profile_name.setText(user.branch_name);
-        profile_name.setText(user.branch_email);
+      //  LoginDAO user = AppController.getInstance().getLoginData();
+
+        profile_name.setText("user@emai..com");
+        profile_name.setText("name");
 
         updateDisplay(new AddVisitor());
     }
@@ -121,13 +112,13 @@ public class HomeActivity extends AppCompatActivity
         //return the bitmap
         return returnedBitmap;
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

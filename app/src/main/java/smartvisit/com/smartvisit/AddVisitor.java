@@ -4,7 +4,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,6 +20,7 @@ import android.view.ViewGroup;
  * to handle interaction events.
  */
 public class AddVisitor extends Fragment {
+    private static final  String TAG = "AddVisitor";
 
 
     public AddVisitor() {
@@ -27,7 +32,8 @@ public class AddVisitor extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank, container, false);
+        setHasOptionsMenu(true);
+        return inflater.inflate(R.layout.fragment_addvisitor, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -45,6 +51,29 @@ public class AddVisitor extends Fragment {
     public void onDetach() {
         super.onDetach();
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+
+        inflater.inflate(R.menu.menu_visitor, menu);
+       // return true;
+       // super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_addVisitor:
+                Log.d(TAG,"action_addVisitor");
+                return true;
+            default:
+                break;
+        }
+
+        return false;
     }
 
     /**

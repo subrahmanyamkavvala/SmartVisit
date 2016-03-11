@@ -17,7 +17,7 @@
         android:layout_height="60dip"
 
 
-        android:src="@drawable/profile" />
+        android:src="@drawable/ic_menu_send" />
 
     <TextView
         android:layout_width="match_parent"

@@ -39,15 +39,18 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+import com.j256.ormlite.dao.Dao;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import smartvisit.com.smartvisit.db.CompanyInfo;
 import smartvisit.com.smartvisit.model.LoginDAO;
 import smartvisit.com.smartvisit.utils.Constants;
 
@@ -374,6 +377,43 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
+    }
+
+
+    public void signUP(){
+        try{
+
+            CompanyInfo info = new CompanyInfo();
+            info.com_email = "";
+            Dao<CompanyInfo,Integer> _comDao = AppController.getInstance().getHelper().getCompanyDao();
+            _comDao.create(info);
+
+
+            //  Log.d(TAG,"contacts row created : ");
+
+        }catch (SQLException e){
+
+            Log.e(TAG,"error :"+e.getMessage());
+        }
+
+
+    }   public void signIn(){
+        try{
+
+            CompanyInfo info = new CompanyInfo();
+            info.com_email = "";
+            Dao<CompanyInfo,Integer> _comDao = AppController.getInstance().getHelper().getCompanyDao();
+            _comDao.create(info);
+
+
+            //  Log.d(TAG,"contacts row created : ");
+
+        }catch (SQLException e){
+
+            Log.e(TAG,"error :"+e.getMessage());
+        }
+
+
     }
 
 

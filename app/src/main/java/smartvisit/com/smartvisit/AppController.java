@@ -7,12 +7,15 @@ package smartvisit.com.smartvisit;
 import android.app.Application;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
 
+import smartvisit.com.smartvisit.db.DatabaseHelper;
 import smartvisit.com.smartvisit.model.LoginDAO;
 import smartvisit.com.smartvisit.utils.LruBitmapCache;
 
@@ -25,9 +28,11 @@ public class AppController extends Application {
     private ImageLoader mImageLoader;
 
 
-   private LoginDAO login_data;
+    private LoginDAO login_data;
     public static String device_token= null;
     private static AppController mInstance;
+
+    private DatabaseHelper databaseHelper = null;
 
     @Override
     public void onCreate() {
@@ -82,5 +87,14 @@ public class AppController extends Application {
     }
     public void setLoginData(LoginDAO data){
         login_data = data;
+    }
+    public DatabaseHelper getHelper() {
+
+        if (databaseHelper == null) {
+            Log.d(TAG, "creating databasehelper !");
+            databaseHelper =
+                    OpenHelperManager.getHelper(this, DatabaseHelper.class);
+        }
+        return databaseHelper;
     }
 }

@@ -1,10 +1,14 @@
 package smartvisit.com.smartvisit;
 
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -85,6 +89,8 @@ public class HomeActivity extends AppCompatActivity
         LoginDAO user = AppController.getInstance().getLoginData();
         profile_name.setText(user.branch_name);
         profile_name.setText(user.branch_email);
+
+        updateDisplay(new AddVisitor());
     }
 
     @Override
@@ -95,6 +101,25 @@ public class HomeActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    public static Bitmap getBitmapFromView(View view) {
+        //Define a bitmap with the same size as the view
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        //Bind a canvas to it
+        Canvas canvas = new Canvas(returnedBitmap);
+        //Get the view's background
+        Drawable bgDrawable =view.getBackground();
+        if (bgDrawable!=null)
+            //has background drawable, then draw it on the canvas
+            bgDrawable.draw(canvas);
+        else
+            //does not have background drawable, then draw white background on the canvas
+            canvas.drawColor(Color.WHITE);
+        // draw the view on the canvas
+        view.draw(canvas);
+        //return the bitmap
+        return returnedBitmap;
     }
 
     @Override
@@ -275,7 +300,7 @@ public class HomeActivity extends AppCompatActivity
 
         params.put("security_token", userdao.branch_key);
         params.put("companyId", userdao.branch_id);
-        Log.e(TAG, "getParams:"+params.toString());
+        Log.e(TAG, "getParams:" + params.toString());
         return  params;
 
 }
@@ -298,4 +323,8 @@ public class HomeActivity extends AppCompatActivity
         return  params;
 
 }
+    private void updateDisplay(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+    }
 }

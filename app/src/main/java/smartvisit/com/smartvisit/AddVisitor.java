@@ -1,6 +1,7 @@
 package smartvisit.com.smartvisit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.j256.ormlite.dao.Dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import smartvisit.com.smartvisit.db.VisitorsCheckIn;
+import smartvisit.com.smartvisit.utils.Utils;
+import smartvisit.com.smartvisit.utils.VisitorAdapter;
 
 
 /**
@@ -21,6 +34,10 @@ import android.view.ViewGroup;
  */
 public class AddVisitor extends Fragment {
     private static final  String TAG = "AddVisitor";
+
+    private ArrayList<VisitorsCheckIn> mVisitorsList = null;
+    private VisitorAdapter mAdapter = null;
+    private ListView mListView;
 
 
     public AddVisitor() {
@@ -33,7 +50,21 @@ public class AddVisitor extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_addvisitor, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_addvisitor, container, false);
+
+        mListView = (ListView)view.findViewById(R.id.visitor_list);
+        mVisitorsList = new ArrayList<>();
+
+
+        mAdapter = new VisitorAdapter(getActivity(),mVisitorsList);
+        mListView.setAdapter(mAdapter);
+
+
+       // insertVisits();
+        updateVisitorList();
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -68,6 +99,9 @@ public class AddVisitor extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_addVisitor:
                 Log.d(TAG,"action_addVisitor");
+                Intent intent = new Intent(getActivity(),Appoinment.class);
+                //startActivity(intent);
+                startActivityForResult(intent,200);
                 return true;
             default:
                 break;
@@ -90,4 +124,66 @@ public class AddVisitor extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+    private void insertVisits() {
+
+
+        try {
+            VisitorsCheckIn checkIn = new VisitorsCheckIn();
+
+            for (int index = 0;index<10;index++){
+
+
+                checkIn.vis_fullname = "Visior "+(index+5);
+                checkIn.vis_company = "infosys  "+(index+5);
+                checkIn.vis_email = "test@gmail.co, ";
+                checkIn.vis_tomeet = "To meet "+(index+5);
+                checkIn.vis_mobile = "92424827"+(index+5);
+                checkIn.vis_indate = new Date();
+                checkIn.vis_indate = new Date();
+
+                Dao<VisitorsCheckIn,Integer> dao =AppController.getInstance().getHelper().getVisitorsDao();
+                dao.create(checkIn);
+
+            }
+
+
+        }catch (SQLException e){
+
+        }
+
+
+    }
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        updateVisitorList();
+
+    }
+
+    private void updateVisitorList(){
+
+        List<VisitorsCheckIn> l = Utils.getVisitorsList();
+        if(l!=null){
+
+            Log.d(TAG, "records "+l.size());
+
+            mVisitorsList.clear();
+            mVisitorsList.addAll(l);
+
+             mAdapter.notifyDataSetChanged();
+
+            //mListView.setAdapter(mAdapter);
+        }else {
+            Log.d(TAG,"list is nulll ");
+
+        }
+    }
+
+
 }

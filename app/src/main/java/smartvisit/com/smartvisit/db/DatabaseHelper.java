@@ -22,6 +22,8 @@ import smartvisit.com.smartvisit.R;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
 
 
+
+
     final static String TAG = DatabaseHelper.class.getName();
 
     // name of the database file for your application -- change to something appropriate for your app

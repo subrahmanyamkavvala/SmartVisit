@@ -105,7 +105,7 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:hint="Email"
-                        android:inputType="textPassword"
+                        android:inputType="text|textEmailAddress"
                         android:longClickable="false"
                         android:maxLength="32"
                         android:textColorHint="@color/hintColor" />

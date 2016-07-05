@@ -82,9 +82,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="#1560BD"
-                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890._"
-                    android:hint="Username"
-                    android:inputType="textNoSuggestions"
+                    android:hint="Email "
+                    android:inputType="text|textEmailAddress"
                     android:maxLength="16"
                     android:singleLine="true" />
                 />

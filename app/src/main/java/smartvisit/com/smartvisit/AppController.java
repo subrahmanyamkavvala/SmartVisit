@@ -14,7 +14,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import smartvisit.com.smartvisit.db.CompanyInfo;
 import smartvisit.com.smartvisit.db.DatabaseHelper;
 import smartvisit.com.smartvisit.model.LoginDAO;
 import smartvisit.com.smartvisit.utils.LruBitmapCache;
@@ -28,7 +30,9 @@ public class AppController extends Application {
     private ImageLoader mImageLoader;
 
 
-    private LoginDAO login_data;
+    private CompanyInfo login_data;
+
+
     public static String device_token= null;
     private static AppController mInstance;
 
@@ -40,6 +44,8 @@ public class AppController extends Application {
         mInstance = this;
         device_token = Settings.Secure.getString(getContentResolver(),
                 Settings.Secure.ANDROID_ID);
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
+        com.nostra13.universalimageloader.core.ImageLoader.getInstance().init(config);
     }
 
     public static synchronized AppController getInstance() {
@@ -81,11 +87,11 @@ public class AppController extends Application {
         }
     }
 
-    public LoginDAO getLoginData(){
+    public CompanyInfo getLoginData(){
         return login_data;
 
     }
-    public void setLoginData(LoginDAO data){
+    public void setLoginData(CompanyInfo data){
         login_data = data;
     }
     public DatabaseHelper getHelper() {

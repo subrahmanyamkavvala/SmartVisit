@@ -1,5 +1,6 @@
 package smartvisit.com.smartvisit.db;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 
 import java.util.Date;
@@ -18,7 +19,7 @@ public class VisitorsCheckIn {
     public static final String VIS_FIELD_MOBILE = "vis_mobile";
     public static final String VIS_FIELD_INDATE = "vis_indate";
     public static final String VIS_FIELD_OUTDATE = "vis_outdate";
-    public static final String VIS_FIELE_imageurl = "vis_outdate";
+    public static final String VIS_FIELE_imageurl = "vis_image_url";
 
     //company Type...
 
@@ -38,7 +39,7 @@ public class VisitorsCheckIn {
 
 
 
-    @DatabaseField(generatedId = true, columnName = VIS_FIELD_INDATE)
+    @DatabaseField(generatedId = true, columnName = VIS_FIELD_ID)
     public int vis_id;
 
     // Define a String type field to hold teacher's name
@@ -52,18 +53,21 @@ public class VisitorsCheckIn {
     @DatabaseField(columnName = VIS_FIELD_COMPANY)
     public String vis_company;
 
+    @DatabaseField(columnName = VIS_FIELD_EMIAL)
+    public String vis_email;
+
 
     @DatabaseField(columnName = VIS_FIELD_MOBILE)
     public String vis_mobile;
 
-    @DatabaseField(columnName = VIS_FIELD_OUTDATE)
+    @DatabaseField(columnName = VIS_FIELD_INDATE,dataType = DataType.DATE_STRING,format = "yyyy-MM-dd HH:mm:ss")
     public Date vis_indate;
 
-    @DatabaseField(columnName = VIS_FIELD_OUTDATE)
-    public String vis_outdate;
+    @DatabaseField(columnName = VIS_FIELD_OUTDATE,dataType = DataType.DATE_STRING,format = "yyyy-MM-dd HH:mm:ss")
+    public Date vis_outdate;
 
     @DatabaseField(columnName = VIS_FIELE_imageurl)
-    public String com_url_image;
+    public String vis_url_image;
 
 
 

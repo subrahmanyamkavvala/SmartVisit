@@ -232,7 +232,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                Log.d(TAG,""+loginDAO.branch_email);
                                Log.d(TAG,""+loginDAO.branch_caa_id);
                                Log.d(TAG, "" + loginDAO.branch_name);
-                               AppController.getInstance().setLoginData(loginDAO);
+                               ///AppController.getInstance().setLoginData(loginDAO);
                                Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
                                startActivity(intent);;
 

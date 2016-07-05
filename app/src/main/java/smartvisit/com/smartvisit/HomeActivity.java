@@ -1,10 +1,12 @@
 package smartvisit.com.smartvisit;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.speech.tts.UtteranceProgressListener;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -27,17 +29,24 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+import com.j256.ormlite.dao.Dao;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import smartvisit.com.smartvisit.db.CompanyInfo;
+import smartvisit.com.smartvisit.db.VisitorsCheckIn;
 import smartvisit.com.smartvisit.model.LoginDAO;
 import smartvisit.com.smartvisit.utils.Constants;
+import smartvisit.com.smartvisit.utils.Utils;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener
@@ -46,8 +55,10 @@ public class HomeActivity extends AppCompatActivity
     private static final String TAG = "HomeActivity";
     TextView profile_name,profile_email;
 
+    private CompanyInfo userInfo;
 
-   LoginDAO userdao = null;
+
+    LoginDAO userdao = null;
     private Button mgetCustomer,mviewvisitor,maddvisitor,mgetemployee,msignup,mgetapartment,msignoutvisitr,mforgotpassword;
 
     @Override
@@ -76,12 +87,29 @@ public class HomeActivity extends AppCompatActivity
         profile_name  = (TextView)headerLayout.findViewById(R.id.profile_name);
         profile_email  = (TextView)headerLayout.findViewById(R.id.profile_email);
 
-      //  LoginDAO user = AppController.getInstance().getLoginData();
+        //  LoginDAO user = AppController.getInstance().getLoginData();
 
-        profile_name.setText("user@emai..com");
-        profile_name.setText("name");
+
+        userInfo = AppController.getInstance().getLoginData();
+
+        if(userInfo!=null){
+            String email =userInfo.com_email;
+            String fullName = userInfo.com_name;
+
+
+            profile_name.setText(email);
+            profile_email.setText(fullName);
+
+        }
 
         updateDisplay(new AddVisitor());
+
+    /*   List<CompanyInfo> list = Utils.getCompantData();
+        if (list!=null){
+            Log.d(TAG,"size"+list.size());
+        }else {
+            Log.d(TAG,"list is null");
+        }*/
     }
 
     @Override
@@ -166,23 +194,23 @@ public class HomeActivity extends AppCompatActivity
             case  R.id.getCustomer:
 
                 getCustomer();
-                    break;
-             case  R.id.addvisitor:
-                    break;
+                break;
+            case  R.id.addvisitor:
+                break;
             case  R.id.viewvisitor:
                 viewVisitor();
-                    break;
+                break;
             case  R.id.getemployee:
-                    break;
+                break;
             case  R.id.signup:
-                    break;
+                break;
 
             case  R.id.getapartment:
-                    break;
+                break;
             case  R.id.signoutvisitor:
-                    break;
+                break;
             case  R.id.forgotpassword:
-                    break;
+                break;
 
         }
 
@@ -251,7 +279,7 @@ public class HomeActivity extends AppCompatActivity
 
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-               // dateFormat.f
+                // dateFormat.f
                 //09-03-2016
                 Calendar cal = Calendar.getInstance();
                 cal.set(2016,02,01);
@@ -262,7 +290,7 @@ public class HomeActivity extends AppCompatActivity
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 String strDate = sdf.format(cal.getTime());
                 // intiming.setText(strDate);
-               String outtime = strDate;
+                String outtime = strDate;
                 Log.d(TAG,"datein"+datein);
                 Log.d(TAG,"outtime"+outtime);
 
@@ -294,7 +322,7 @@ public class HomeActivity extends AppCompatActivity
         Log.e(TAG, "getParams:" + params.toString());
         return  params;
 
-}
+    }
 
 
     public Map<String,String> viewVisitorParam(String datein,String outtime){
@@ -313,9 +341,11 @@ public class HomeActivity extends AppCompatActivity
         Log.e(TAG, "getParams:"+params.toString());
         return  params;
 
-}
+    }
     private void updateDisplay(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
     }
+
+
 }

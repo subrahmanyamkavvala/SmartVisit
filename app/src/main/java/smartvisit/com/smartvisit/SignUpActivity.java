@@ -6,6 +6,7 @@ package smartvisit.com.smartvisit;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -21,6 +22,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.j256.ormlite.dao.Dao;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -188,7 +192,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
 
         }
 
-        if (!inpur_password.equals(inpur_confirmPassword)) {
+        if (!inpur_confirmPassword.isEmpty()&&!inpur_password.equals(inpur_confirmPassword)) {
             confirmPassword.setError("Conform password does match");
             isValid = false;
         } else {
@@ -211,6 +215,15 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
             Date date  = new Date();
             info.com_joineddate  = date;
 
+
+            try {
+                Dao<CompanyInfo, Integer> companyInfoIntegerDao = AppController.getInstance().getHelper().getCompanyDao();
+                companyInfoIntegerDao.create(info);
+                AppController.getInstance().setLoginData(info);
+
+            }catch (SQLException e){
+
+            }
             Log.d(TAG, "go ahead sign up");
 
             try {
@@ -220,8 +233,12 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
             }
 
             Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+            intent.putExtra("email",inpur_emailAddress);
+            intent.putExtra("password",inpur_password);
+            intent.putExtra("name",inpur_userFullName);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-
+            finish();
             pDialog.cancel();
             pDialog = null;
         }else {
@@ -239,7 +256,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
 
 
 
-     @Override
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 

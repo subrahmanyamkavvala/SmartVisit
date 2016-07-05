@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:background="@color/wallet_holo_blue_light"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="smartvisit.com.smartvisit.Appoinment">
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip" >
+                <ImageView
+                    android:id="@+id/app_profile_image"
+                    android:layout_width="80dip"
+                    android:layout_height="60dip"
+
+                    android:src="@drawable/profile" />
+
+                 <ImageView
+                    android:id="@+id/app_profile_browse"
+                    android:layout_width="45dip"
+                    android:layout_height="45dip"
+                     android:onClick="viewClicked"
+                    android:src="@drawable/attach_hdpi"
+                    android:layout_marginLeft="15dip"/>
+
+                 <ImageView
+                    android:id="@+id/app_profile_capture"
+                    android:layout_width="45dip"
+                    android:layout_height="45dip"
+                     android:onClick="viewClicked"
+                    android:src="@drawable/ic_menu_camera"
+                     android:layout_marginLeft="15dip"/>
+
+
+
+            </LinearLayout>/>
+
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/app_fullname"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Full Name"
+                    android:inputType="text|textNoSuggestions"
+                    android:maxLength="16"
+                    android:singleLine="true"
+                    android:textColorHint="@color/hintColor" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/app_tomeet"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="20"
+                    android:hint="Person Name To Meet "
+                    android:inputType="text"
+                    android:longClickable="false"
+                    android:maxLength="32"
+
+                    android:textColorHint="@color/hintColor" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/app_companyName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Company Name"
+                    android:inputType="text"
+                    android:longClickable="false"
+                    android:maxLength="32"
+
+                    android:textColorHint="@color/hintColor" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/app_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:longClickable="false"
+                    android:maxLength="62"
+
+                    android:textColorHint="@color/hintColor" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/app_mobile"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Mobile"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:singleLine="true"
+                    android:textColorHint="@color/hintColor" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check In "
+                android:textColor="@color/BLACK"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/app_checkindate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="15dip"
+                    android:text="13.0"
+                    android:onClick="viewClicked"
+
+                   />
+
+                <Button
+                    android:id="@+id/app_chickintime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:onClick="viewClicked"
+
+                    android:layout_marginLeft="15dip"
+                    android:layout_marginRight="15dip"
+
+                    android:text="13.0" />
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check Out "
+                android:textColor="@color/BLACK"
+
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/app_checkoutdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:onClick="viewClicked"
+                    android:layout_marginLeft="15dip"
+
+                    android:text="13.0" />
+
+                <Button
+                    android:id="@+id/app_checkouttime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="15dip"
+                    android:layout_marginRight="15dip"
+                    android:onClick="viewClicked"
+
+
+                    android:text="13.0" />
+
+            </LinearLayout>/>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>
